@@ -6,5 +6,5 @@ import MachineCoding.TicTacToe.models.Move;
 import MachineCoding.TicTacToe.models.Player;
 
 public interface WinningStrategy {
-    boolean checkWinner(Board board, Player player, Cell cell);
+    boolean checkWinner(Board board, Move move);
 }

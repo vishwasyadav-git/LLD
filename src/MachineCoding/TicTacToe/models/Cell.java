@@ -16,7 +16,13 @@ public class Cell {
     public int getRow() {
         return row;
     }
-
+ public void display(){
+        if(player==null){
+            System.out.print("| -- |");
+        }else{
+            System.out.print("| "+player.getSymbol().getaChar()+ " |");
+        }
+ }
     public void setRow(int row) {
         this.row = row;
     }

@@ -6,7 +6,16 @@ import java.util.List;
 public class Board {
     private int size;
     private  int dimension;
-    private List<List<Cell>> board;
+
+    public int getDimension() {
+        return dimension;
+    }
+
+    public void setDimension(int dimension) {
+        this.dimension = dimension;
+    }
+
+    private static List<List<Cell>> board;
     public Board(int dimension){
         this.dimension=dimension;
         board=new ArrayList<>();
@@ -17,6 +26,15 @@ public class Board {
             board.get(i).add(new Cell(i,j));
         }
         }
+    }
+    public  void printBoard(){
+        for(List<Cell> row: board){
+            for(Cell cell:row){
+                cell.display();
+            }
+            System.out.print("\n");
+        }
+
     }
     public int getSize() {
         return size;
