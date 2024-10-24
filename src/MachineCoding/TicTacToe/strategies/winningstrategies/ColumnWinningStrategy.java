@@ -21,7 +21,7 @@ public class ColumnWinningStrategy implements WinningStrategy{
             colMap.put(achar,0);
         }
         colMap.put(achar,colMap.get(achar)+1);
-        if(colMap.get(achar).equals(board.getSize())){
+        if(colMap.get(achar).equals(board.getDimension())){
             return true;
         }
         return false;

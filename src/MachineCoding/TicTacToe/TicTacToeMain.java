@@ -21,7 +21,7 @@ public class TicTacToeMain {
         //Take player input
         List<Player> players=new ArrayList<>();
         players.add(new Player(new Symbol('X')," Vish", PlayerType.HUMAN));
-        players.add(new Bot(new Symbol('O')," Scal", PlayerType.BOT,BotDifficultyLevel.HARD));
+        players.add(new Bot(new Symbol('O')," Scal", PlayerType.BOT,BotDifficultyLevel.EASY));
         List<WinningStrategy> winningStrategies=List.of(
                 new RowWinningStrategy(),
                 new ColumnWinningStrategy(),
@@ -46,6 +46,12 @@ public class TicTacToeMain {
                 GameController.makeMove(game);
 
         }
-        System.out.println("DEBUG");
+        GameController.printBoard(game);
+        if(GameController.checkGameState(game).equals(GameState.ENDED)){
+            System.out.println(GameController.getWinner(game).getName() +"has won the game");
+        }else{
+            System.out.println("Game Draw");
+        }
+
     }
 }
