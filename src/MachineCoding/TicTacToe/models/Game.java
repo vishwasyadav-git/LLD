@@ -1,5 +1,6 @@
 package MachineCoding.TicTacToe.models;
 
+import MachineCoding.TicTacToe.exceptions.InvalidMoveExceptions;
 import MachineCoding.TicTacToe.strategies.winningstrategies.WinningStrategy;
 
 import java.util.ArrayList;
@@ -9,12 +10,12 @@ import java.util.Set;
 
 public class Game {
     private static Board board;
-    private List<Player> players;
-    private  List<Move> moves;
-    private  Player winner;
-    private  GameState gameState;
-    private int nextPlayerIndex;
-    private  List<WinningStrategy> winningStrategies;
+    private static List<Player> players;
+    private static List<Move> moves;
+    private static Player winner;
+    private static GameState gameState;
+    private static int nextPlayerIndex;
+    private static List<WinningStrategy> winningStrategies;
 
     public static  Builder getBuilder(){
         return new Builder();
@@ -85,6 +86,58 @@ public class Game {
 
     public void printBoard() {
         board.printBoard();
+    }
+    private static  boolean validateMove(Move move){
+        int row=move.getCell().getRow();
+        int col=move.getCell().getColumn();
+        if(row<0 || row>board.getDimension() || col<0 || col> board.getDimension()){
+            return false;
+        }
+
+        //cell is empty or not
+        if(!board.getBoard().get(row).get(col).getCellState().equals(CellState.EMPTY)){
+            return false;
+        }
+        return true;
+    }
+    public static void makeMove() throws InvalidMoveExceptions {
+        Player currentPlayer=players.get(nextPlayerIndex);
+        System.out.println("This is"+currentPlayer.getName() +"'s move");
+
+        //Player will choose the move that they want to do
+        Move move=currentPlayer.makeMove(board);
+
+        //Game will validate the move
+        if(!validateMove(move)){
+            //throw some exception
+            throw new InvalidMoveExceptions("Invalid move please try again");
+        }
+
+        //Move is valid so apply this move to board
+        int row=move.getCell().getRow();
+        int col=move.getCell().getColumn();
+        Cell cell=board.getBoard().get(row).get(col);
+        cell.setCellState(CellState.FILLED);
+        cell.setPlayer(currentPlayer);
+        Move finalMove=new Move(currentPlayer,cell);
+        moves.add(finalMove);
+        nextPlayerIndex=(nextPlayerIndex+1)% players.size();
+
+        if(checkWinner(finalMove)){
+            winner=currentPlayer;
+            gameState=GameState.ENDED;
+        }else if(moves.size()== board.getDimension()* board.getDimension()){
+            gameState=GameState.DRAW;
+        }
+
+    }
+    private static boolean checkWinner(Move move){
+        for (WinningStrategy winningStrategy: winningStrategies){
+            if (winningStrategy.checkWinner(board,move)){
+                return true;
+            }
+        }
+        return  false;
     }
 
     public static class Builder{

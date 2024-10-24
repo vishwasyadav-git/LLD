@@ -8,11 +8,12 @@ public class Player {
     private Symbol symbol;
     private  String name;
     private PlayerType playerType;
-    private static Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner =new Scanner(System.in);
     public Player(Symbol symbol, String name, PlayerType playerType) {
         this.symbol = symbol;
         this.name = name;
         this.playerType = playerType;
+        //this.scanner=new Scanner(System.in);
     }
 
     public Symbol getSymbol() {
@@ -37,5 +38,16 @@ public class Player {
 
     public void setPlayerType(PlayerType playerType) {
         this.playerType = playerType;
+    }
+
+    Move makeMove(Board board){
+        //Take row,col from the player
+       // Scanner scanner=new Scanner(System.in);
+        System.out.println("Please enter row number  where you want to make move ");
+        int row= scanner.nextInt();
+        System.out.println("Please enter row number  where you want to make move ");
+        int col=scanner.nextInt();
+        return new Move(this,new Cell(row,col));
+
     }
 }

@@ -1,5 +1,6 @@
 package MachineCoding.TicTacToe.controllers;
 
+import MachineCoding.TicTacToe.exceptions.InvalidMoveExceptions;
 import MachineCoding.TicTacToe.models.Game;
 import MachineCoding.TicTacToe.models.GameState;
 import MachineCoding.TicTacToe.models.Player;
@@ -19,8 +20,8 @@ public class GameController {
                 .setWinningStrategies(winningStrategies)
                 .build();
     }
-    public static  void makeMove(Game game){
-
+    public  static  void makeMove(Game game) throws InvalidMoveExceptions {
+        Game.makeMove();
     }
     public static GameState checkGameState(Game game){
         return game.getGameState();
