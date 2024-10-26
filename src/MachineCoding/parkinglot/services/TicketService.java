@@ -2,6 +2,7 @@ package MachineCoding.parkinglot.services;
 
 import MachineCoding.parkinglot.exceptions.GateNotFoundException;
 import MachineCoding.parkinglot.models.Gate;
+import MachineCoding.parkinglot.models.ParkingLot;
 import MachineCoding.parkinglot.models.Ticket;
 import MachineCoding.parkinglot.models.Vehicle;
 import MachineCoding.parkinglot.repositories.GateRepository;
@@ -51,7 +52,10 @@ public class TicketService {
               vehicle=optionalVehicle.get();
           }
          ticket.setVehicle(vehicle);
-          ticket.setParkingSpot(parkingSpotAssignmentStrategy.assignParkingSpot(vehicle));
-         return null;
+         ParkingLot parkingLot= gate.getParkingLot();
+          ticket.setParkingSpot(parkingSpotAssignmentStrategy.assignParkingSpot(parkingLot,vehicle));
+
+
+         return ticket;
      }
 }

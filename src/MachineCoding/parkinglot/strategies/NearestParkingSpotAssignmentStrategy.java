@@ -7,6 +7,6 @@ import MachineCoding.parkinglot.models.Vehicle;
 public class NearestParkingSpotAssignmentStrategy implements ParkingSpotAssignmentStrategy{
     @Override
     public ParkingSpot assignParkingSpot(ParkingLot parkingLot, Vehicle vehicle) {
-        return null;
+        return new ParkingSpot();
     }
 }
