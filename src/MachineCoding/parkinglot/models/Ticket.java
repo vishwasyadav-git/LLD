@@ -49,4 +49,12 @@ public class Ticket extends BaseModel{
     public void setGate(Gate gate) {
         this.gate = gate;
     }
+
+    public Operator getOperator() {
+        return operator;
+    }
+
+    public void setOperator(Operator operator) {
+        this.operator = operator;
+    }
 }
